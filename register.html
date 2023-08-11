@@ -60,10 +60,9 @@
             </div>
             <div class="mb-3">
               <label for="password" class="form-label">Password</label>
-              <input type="password" class="form-control" id="password" name="password" required>
+              <input type="password" class="form-control" id="password" name="password" required placeholder="8 character passcode">
             </div>
             <button type="submit" class="btn btn-primary">Create Account</button>
-            <button id="googleSignInButton" class="btn btn-danger">Sign in with Google</button>
 
           </form>
         </div>
@@ -96,9 +95,7 @@
     firebase.initializeApp(firebaseConfig);
 
     const registrationForm = document.getElementById('registrationForm');
-    const googleSignInButton = document.getElementById('googleSignInButton');
     const auth = firebase.auth();
-    const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
     registrationForm.addEventListener('submit', event => {
       event.preventDefault();
@@ -122,21 +119,8 @@
         });
     });
 
-    googleSignInButton.addEventListener('click', () => {
-      auth.signInWithPopup(googleAuthProvider)
-        .then(userCredential => {
-          const user = userCredential.user;
-         // Redirect or perform other actions on successful registration
-         const registrationSuccessModal = new bootstrap.Modal(document.getElementById('registrationSuccessModal'));
-    registrationSuccessModal.show();
-        window.location.href = 'music-sheets.html';
-
-        })
-        .catch(error => {
-          // Handle Google Sign-In error
-          console.error('Google Sign-In error:', error.message);
-        });
-    });
+   
+    
   </script>
 </body>
 </html>
