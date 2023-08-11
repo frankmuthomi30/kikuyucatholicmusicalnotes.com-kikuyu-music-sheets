@@ -1,0 +1,123 @@
+# Query: kikuyu catholic mass music
+# Flags: WordMatch
+# ContextLines: 1
+
+28 results - 8 files
+
+about.html:
+   5    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   6:   <title>About - Kikuyu Catholic Musical Notes</title>
+   7    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  13          <div class="container">
+  14:           <a class="navbar-brand" href="index.html">Kikuyu Catholic Musical Notes</a>
+  15            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+
+  49      <div class="container">
+  50:       <h2 class="text-center mb-4">About Kikuyu Catholic Musical Notes</h2>
+  51        <p>
+  52:         Welcome to Kikuyu Catholic Musical Notes! Our website aims to provide a collection of Kikuyu Catholic mass songs
+  53          and music sheets. We are dedicated to preserving and sharing the rich musical heritage of Kikuyu Catholic masses.
+
+  67    <footer class="bg-dark text-white py-3 text-center">
+  68:     <p>&copy; 2023 Kikuyu Catholic Musical Notes</p>
+  69    </footer>
+
+contact.html:
+   5    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   6:   <title>Contact - Kikuyu Catholic Musical Notes</title>
+   7    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  13          <div class="container">
+  14:           <a class="navbar-brand" href="index.html">Kikuyu Catholic Musical Notes</a>
+  15            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+
+  66    <footer class="bg-dark text-white py-3 text-center">
+  67:     <p>&copy; 2023 Kikuyu Catholic Musical Notes</p>
+  68    </footer>
+
+index.html:
+   5    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   6:   <title>Kikuyu Catholic Musical Notes</title>
+   7    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  12        <div class="container">
+  13:         <a class="navbar-brand" href="index.html">Kikuyu Catholic Musical Notes</a>
+  14          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+
+  73    <footer class="bg-dark text-white py-3 text-center">
+  74:     <p>&copy; 2023 Kikuyu Catholic Musical Notes</p>
+  75    </footer>
+
+login.html:
+   5    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   6:   <title>Login - Kikuyu Catholic Musical Notes</title>
+   7    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  12      <div class="container">
+  13:       <a class="navbar-brand" href="index.html">Kikuyu Catholic Musical Notes</a>
+  14        <!-- Add navigation links here -->
+
+  88    <footer class="bg-dark text-white py-3 text-center">
+  89:     <p>&copy; 2023 Kikuyu Catholic Musical Notes</p>
+  90    </footer>
+
+music-sheets.html:
+   5    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   6:   <title>Music Sheets - Kikuyu Catholic Musical Notes</title>
+   7    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  13          <div class="container">
+  14:           <a class="navbar-brand" href="index.html">Kikuyu Catholic Musical Notes</a>
+  15            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+
+  88    <footer class="bg-dark text-white py-3 text-center">
+  89:     <p>&copy; 2023 Kikuyu Catholic Musical Notes</p>
+  90    </footer>
+
+register.html:
+   5    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   6:   <title>Create Account - Kikuyu Catholic Musical Notes</title>
+   7    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  12      <div class="container">
+  13:       <a class="navbar-brand" href="index.html">Kikuyu Catholic Musical Notes</a>
+  14        <ul class="navbar-nav">
+
+  75    <footer class="bg-dark text-white py-3 text-center">
+  76:     <p>&copy; 2023 Kikuyu Catholic Musical Notes</p>
+  77    </footer>
+
+terms.html:
+   5    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   6:   <title>Terms of Use - Kikuyu Catholic Musical Notes</title>
+   7    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  13      <div class="container">
+  14:       <a class="navbar-brand" href="index.html">Kikuyu Catholic Musical Notes</a>
+  15        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+
+  46        <p>
+  47:         Welcome to Kikuyu Catholic Musical Notes! By accessing and using this website, you agree to comply with and be bound by
+  48          the following terms and conditions:
+
+  61        <p>
+  62:         Kikuyu Catholic Musical Notes is not liable for any inaccuracies, errors, or omissions in the content provided on the website.
+  63          Users are responsible for verifying the accuracy of the music sheets before use.
+
+  70    <footer class="bg-dark text-white py-3 text-center">
+  71:     <p>&copy; 2023 Kikuyu Catholic Musical Notes</p>
+  72    </footer>
+
+upload.html:
+   5    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   6:   <title>Upload Music Sheet - Kikuyu Catholic Musical Notes</title>
+   7    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  12      <div class="container">
+  13:       <a class="navbar-brand" href="index.html">Kikuyu Catholic Musical Notes</a>
+  14        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+
+  94    <footer class="bg-dark text-white py-3 text-center">
+  95:     <p>&copy; 2023 Kikuyu Catholic Musical Notes</p>
+  96    </footer>

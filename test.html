@@ -1,0 +1,58 @@
+<!-- ... Other parts of your HTML ... -->
+
+<script>
+  // ... Your Firebase configuration ...
+  
+  firebase.initializeApp(firebaseConfig);
+  
+  const database = firebase.database();
+  const musicSheetsRef = database.ref('musicSheets');
+  let musicSheetsData = {}; // Define at a higher scope
+  
+  // Fetch and display music sheets
+  musicSheetsRef.once('value', snapshot => {
+    musicSheetsData = snapshot.val(); // Assign the fetched data to the variable
+    const musicSheetList = document.getElementById('musicSheetList');
+    // ... Existing code ...
+  
+    // Search functionality
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('input', () => {
+      const searchTerm = searchInput.value.toLowerCase();
+      // ... Existing code ...
+  
+      for (const musicSheetId in musicSheetsData) {
+        const musicSheet = musicSheetsData[musicSheetId];
+        if (musicSheet.name.toLowerCase().includes(searchTerm)) {
+          // ... Existing code ...
+        }
+      }
+    });
+  
+    // Sort functionality
+    const sortSelect = document.getElementById('sortSelect');
+    sortSelect.addEventListener('change', () => {
+      const sortBy = sortSelect.value;
+      // ... Clear existing results ...
+  
+      const sortedMusicSheets = Object.values(musicSheetsData).sort((a, b) => {
+        if (sortBy === 'title') {
+          return a.name.localeCompare(b.name);
+        }
+        // Add other sorting options here
+      });
+      sortedMusicSheets.forEach(musicSheet => {
+        const musicSheetCard = createMusicSheetCard(musicSheet);
+        musicSheetList.appendChild(musicSheetCard);
+      });
+    });
+  
+    // ... Rest of your script ...
+  
+    // Helper function to create a music sheet card
+    function createMusicSheetCard(musicSheet) {
+      // ... Existing code ...
+    }
+  });
+  </script>
+  

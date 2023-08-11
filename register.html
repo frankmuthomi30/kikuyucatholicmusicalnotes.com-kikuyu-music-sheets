@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account -Kikuyu Catholic Musical Notes</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Kikuyu Catholic Mass Music</a>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">Home</a>
+        </li>
+        </ul>
+    </div>
+    
+  </nav>
+
+  <!-- Registration Success Modal -->
+<div class="modal fade" id="registrationSuccessModal" tabindex="-1" aria-labelledby="registrationSuccessModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="registrationSuccessModalLabel">Account Created</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Your account has been successfully created!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <!-- Registration Form Section -->
+  <section class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-4">Create Account</h2>
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <form id="registrationForm">
+            <div class="mb-3">
+              <label for="name" class="form-label">Full Name</label>
+              <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="mb-3">
+              <label for="username" class="form-label">Username</label>
+              <input type="text" class="form-control" id="username" name="username" required>
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email Address</label>
+              <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Create Account</button>
+            <button id="googleSignInButton" class="btn btn-danger">Sign in with Google</button>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-3 text-center">
+    <p>&copy; 2023Kikuyu Catholic Musical Notes</p>
+    <p>Website by  Frank Muthomi.</p>
+
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-database.js"></script>
+  <script>
+  const firebaseConfig = {
+  apiKey: "AIzaSyCeOpJl0vXFh6zYxLBCn8Z-18lpZQaJOjg",
+  authDomain: "kikuyu-music-sheets.firebaseapp.com",
+  databaseURL: "https://kikuyu-music-sheets-default-rtdb.firebaseio.com",
+  projectId: "kikuyu-music-sheets",
+  storageBucket: "kikuyu-music-sheets.appspot.com",
+  messagingSenderId: "592425796349",
+  appId: "1:592425796349:web:05770d4f620dd825257494",
+  measurementId: "G-TTC5LYL8GY"
+};
+    firebase.initializeApp(firebaseConfig);
+
+    const registrationForm = document.getElementById('registrationForm');
+    const googleSignInButton = document.getElementById('googleSignInButton');
+    const auth = firebase.auth();
+    const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
+
+    registrationForm.addEventListener('submit', event => {
+      event.preventDefault();
+
+      const email = registrationForm.email.value;
+      const password = registrationForm.password.value;
+
+      // Create user account
+      auth.createUserWithEmailAndPassword(email, password)
+        .then(userCredential => {
+          const user = userCredential.user;
+          // Redirect or perform other actions on successful registration
+          const registrationSuccessModal = new bootstrap.Modal(document.getElementById('registrationSuccessModal'));
+    registrationSuccessModal.show();
+        window.location.href = 'music-sheets.html';
+
+        })
+        .catch(error => {
+          // Handle registration error
+          console.error('Registration error:', error.message);
+        });
+    });
+
+    googleSignInButton.addEventListener('click', () => {
+      auth.signInWithPopup(googleAuthProvider)
+        .then(userCredential => {
+          const user = userCredential.user;
+          // Redirect or perform other actions on successful Google Sign-In
+          window.location.href = 'music-sheets.html';
+        })
+        .catch(error => {
+          // Handle Google Sign-In error
+          console.error('Google Sign-In error:', error.message);
+        });
+    });
+  </script>
+</body>
+</html>

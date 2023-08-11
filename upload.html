@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Music Sheet - Kikuyu Catholic Musical Notes</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Kikuyu Catholic Musical Notes</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="music-sheets.html">Music Sheets</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="upload.html">Upload</a>
+          </li>
+     
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="terms.html">Terms</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Upload Form -->
+  <section class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-4">Upload Music Sheet</h2>
+      <form id="uploadForm">
+        <div class="mb-3">
+          <label for="songName" class="form-label">Song Name</label>
+          <input type="text" class="form-control" id="songName" required>
+        </div>
+        <div class="mb-3">
+          <label for="owner" class="form-label">Music owner</label>
+          <input type="text" class="form-control" id="owner" required>
+        </div>
+        <div class="mb-3">
+          <label for="uploader" class="form-label">Uploader</label>
+          <input type="text" class="form-control" id="uploader" required>
+        </div>
+        <div class="mb-3">
+          <label for="category" class="form-label">Category</label>
+          <select class="form-select" id="category" required>
+            <option value=""><strong>Select Category</strong></option>
+            <option value="Kuingira">Kuingira (Entrance)</option>
+            <option value="Mitha">Mitha</option>
+            <option value="INJILI">Injili</option>
+            <option value="Matega">Matega</option>
+            <option value="Wamukiri">Wamukiri</option>
+            <option value="Ngaatho">Ngaatho</option>
+            <option value="Exit">Exit</option>
+            <option value="Iitia">Iitia (Adoration)</option>
+            <option value="Set Pieces">Set Pieces</option>
+            <option value="Nyimbo cia Joseph">Nyimbo cia Joseph</option>
+            <option value="Mathiko">Mathiko (Burial)</option>
+            <option value="Uhiki">Uhiki (Wedding)</option>
+            <option value="Easter">Easter</option>
+            <option value="Iciariro">Iciariro (Christmass)</option>
+            <option value="Hindi ya Ngindu">Hindi ya Ngindu (Palm Sunday)</option>
+            <option value="Iitia">Iitia (Adoration)</option>
+            <!-- Add other categories here -->
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="musicSheetFile" class="form-label">Music Sheet File (PDF)</label>
+          <input type="file" class="form-control" id="musicSheetFile" accept=".pdf" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Upload</button>
+      </form>
+    </div>
+  </section>
+
+ <!-- Upload Modal -->
+<div id="uploadModal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Uploading Music Sheet</h5>
+      </div>
+      <div class="modal-body">
+        <div id="uploadSpinner" class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <p id="modalMessage"></p>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-3 text-center">
+    <p>&copy; 2023 Kikuyu Catholic Musical Notes</p>
+    <p>Website by  Frank Muthomi.</p>
+
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-database.js"></script> <!-- Add this line for Realtime Database -->
+
+  <script>
+// Initialize Firebase
+const firebaseConfig = {
+    apiKey: "AIzaSyCeOpJl0vXFh6zYxLBCn8Z-18lpZQaJOjg",
+    authDomain: "kikuyu-music-sheets.firebaseapp.com",
+    databaseURL: "https://kikuyu-music-sheets-default-rtdb.firebaseio.com",
+    projectId: "kikuyu-music-sheets",
+    storageBucket: "kikuyu-music-sheets.appspot.com",
+    messagingSenderId: "592425796349",
+    appId: "1:592425796349:web:05770d4f620dd825257494",
+    measurementId: "G-TTC5LYL8GY"
+  };
+firebase.initializeApp(firebaseConfig);
+
+// Initialize Firebase services
+const storage = firebase.storage();
+const database = firebase.database(); // Initialize the Realtime Database
+
+const uploadForm = document.getElementById('uploadForm');
+const uploadModal = document.getElementById('uploadModal');
+const uploadSpinner = document.getElementById('uploadSpinner');
+const modalMessage = document.getElementById('modalMessage');
+
+uploadForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const songName = document.getElementById('songName').value;
+  const owner = document.getElementById('owner').value; // Get owner value
+  const uploader = document.getElementById('uploader').value;
+  const category = document.getElementById('category').value;
+  const musicSheetFile = document.getElementById('musicSheetFile').files[0];
+
+  // Show the upload modal and loading spinner
+  uploadModal.style.display = 'block';
+  uploadSpinner.style.display = 'block';
+  modalMessage.textContent = 'Uploading...';
+
+  // Upload music sheet file to Firebase Storage
+  const storageRef = storage.ref();
+  const musicSheetRef = storageRef.child(`music_sheets/${musicSheetFile.name}`);
+  const uploadTask = musicSheetRef.put(musicSheetFile);
+
+  uploadTask.on('state_changed',
+    (snapshot) => {
+      // Progress update - you can handle progress here if needed
+    },
+    (error) => {
+      // Handle error
+      console.error(error);
+      modalMessage.textContent = 'An error occurred during upload. Please try again.';
+      setTimeout(() => {
+        // Hide the modal and loading spinner after a delay
+        uploadModal.style.display = 'none';
+        uploadSpinner.style.display = 'none';
+      }, 3000); // Hide after 3 seconds
+    },
+    () => {
+      // Upload successful, store metadata in database
+      uploadTask.snapshot.ref.getDownloadURL().then((downloadUrl) => {
+        const musicSheetData = {
+          name: songName,
+          owner: owner, // Include owner value
+          uploader: uploader,
+          category: category,
+          downloadUrl: downloadUrl
+        };
+
+        // Store metadata in the Realtime Database
+        database.ref('musicSheets').push(musicSheetData);
+
+        // Clear form fields after successful upload
+        document.getElementById('songName').value = '';
+        document.getElementById('owner').value = '';
+        document.getElementById('uploader').value = '';
+        document.getElementById('category').value = '';
+        document.getElementById('musicSheetFile').value = '';
+
+        modalMessage.textContent = 'Music sheet uploaded successfully!';
+        setTimeout(() => {
+          // Hide the modal and loading spinner after a delay
+          uploadModal.style.display = 'none';
+          uploadSpinner.style.display = 'none';
+        }, 3000); // Hide after 3 seconds
+      });
+    }
+  );
+});
+
+  </script>
+</body>
+</html>

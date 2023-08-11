@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kikuyu Catholic Musical Notes</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+     <!-- Navigation Bar -->
+     <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">Kikuyu Catholic Musical Notes</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="music-sheets.html">Music Sheets</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="upload.html">Upload</a>
+            </li>
+           
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="terms.html">Terms</a>
+            </li>
+            <li class="nav-item" id="userAccountIcon"></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+  <!-- Latest Music Sheets -->
+  <section class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-4">Latest Music Sheets</h2>
+      <div class="row" id="latestMusicSheets">
+        <!-- Music sheets will be populated dynamically -->
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Sign Up / Log In Section -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <h2 class="text-center mb-4">Join Us</h2>
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <p class="lead text-center">If you don't have an account, you can sign up to access exclusive content.</p>
+        <div class="text-center">
+          <a href="register.html" class="btn btn-primary mr-3">Sign Up</a>
+          <a href="login.html" class="btn btn-outline-primary">Log In</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-3 text-center">
+    <p>&copy; 2023 Kikuyu Catholic Musical Notes</p>
+    <p>Website by  Frank Muthomi.</p>
+
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-database.js"></script>
+  <script>
+  const firebaseConfig = {
+  apiKey: "AIzaSyCeOpJl0vXFh6zYxLBCn8Z-18lpZQaJOjg",
+  authDomain: "kikuyu-music-sheets.firebaseapp.com",
+  databaseURL: "https://kikuyu-music-sheets-default-rtdb.firebaseio.com",
+  projectId: "kikuyu-music-sheets",
+  storageBucket: "kikuyu-music-sheets.appspot.com",
+  messagingSenderId: "592425796349",
+  appId: "1:592425796349:web:05770d4f620dd825257494",
+  measurementId: "G-TTC5LYL8GY"
+};
+    firebase.initializeApp(firebaseConfig);
+
+    const database = firebase.database();
+    const musicSheetsRef = database.ref('musicSheets');
+
+
+    // ... Your existing Firebase initialization code ...
+
+    firebase.auth().onAuthStateChanged(user => {
+  const userAccountIcon = document.getElementById('userAccountIcon');
+  
+  if (user) {
+    // User is signed in
+    const userDisplayName = user.email;
+    // Update the navbar with the user's email or account icon
+    userAccountIcon.innerHTML = `
+      <span class="nav-link">Welcome, ${userDisplayName}!</span>
+      <a href="login.html" class="btn btn-outline-primary">Log Out</a>
+    `;
+  } else {
+    // User is not signed in
+    userAccountIcon.innerHTML = `
+      <a href="register.html" class="btn btn-primary mr-3">Sign Up</a>
+      <a href="login.html" class="btn btn-outline-primary">Log In</a>
+    `;
+  }
+});
+
+
+
+    // Fetch and display latest music sheets
+    musicSheetsRef.limitToLast(10).once('value', snapshot => {
+      const musicSheetsData = snapshot.val();
+      const latestMusicSheets = document.getElementById('latestMusicSheets');
+
+      for (const musicSheetId in musicSheetsData) {
+        const musicSheet = musicSheetsData[musicSheetId];
+        const musicSheetCard = document.createElement('div');
+        musicSheetCard.className = 'col-md-4';
+        musicSheetCard.innerHTML = `
+          <div class="card mb-4">
+            <div class="card-body">
+              <h5 class="card-title">${musicSheet.name}</h5>
+              <p class="card-text">Uploaded by: ${musicSheet.uploader}</p>
+              <a href="${musicSheet.downloadUrl}" class="btn btn-primary">Download</a>
+            </div>
+          </div>
+        `;
+        latestMusicSheets.appendChild(musicSheetCard);
+      }
+    });
+  </script>
+</body>
+</html>
