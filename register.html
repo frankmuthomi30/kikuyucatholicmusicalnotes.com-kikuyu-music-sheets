@@ -126,8 +126,11 @@
       auth.signInWithPopup(googleAuthProvider)
         .then(userCredential => {
           const user = userCredential.user;
-          // Redirect or perform other actions on successful Google Sign-In
-          window.location.href = 'music-sheets.html';
+         // Redirect or perform other actions on successful registration
+         const registrationSuccessModal = new bootstrap.Modal(document.getElementById('registrationSuccessModal'));
+    registrationSuccessModal.show();
+        window.location.href = 'music-sheets.html';
+
         })
         .catch(error => {
           // Handle Google Sign-In error
