@@ -189,6 +189,8 @@ function createMusicSheetCard(musicSheet) {
     <div class="card mb-4">
       <div class="card-body">
         <h5 class="card-title">${musicSheet.name}</h5>
+        <p class="card-text">Composer: ${musicSheet.owner}</p>
+        <p class="card-text">Category: ${musicSheet.category}</p>
         <p class="card-text">Uploaded by: ${musicSheet.uploader}</p>
         <a href="#" class="btn btn-primary" onclick="downloadMusicSheet('${musicSheet.downloadUrl}', '${musicSheet.name}')">Download</a>
       </div>
